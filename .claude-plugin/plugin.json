@@ -11,9 +11,9 @@
     "format": {
       "type": "string",
       "title": "Notification sequence",
-      "description": "auto picks one for your terminal. osc777: Agent Terminal, Ghostty, Warp, urxvt. osc9: Windows Terminal, iTerm2, WezTerm, ConEmu. osc99: kitty. bell: the terminal bell only. off: no notifications.",
+      "description": "auto picks one for your terminal. osc777: Agent Terminal, Ghostty, Warp, urxvt. osc9: Windows Terminal, iTerm2, WezTerm, ConEmu. osc99: kitty. all: all three, for a terminal auto does not know (one that reads several shows several). bell: the terminal bell only. off: no notifications.",
       "default": "auto",
-      "options": ["auto", "osc777", "osc9", "osc99", "bell", "off"]
+      "options": ["auto", "osc777", "osc9", "osc99", "all", "bell", "off"]
     },
     "details": {
       "type": "boolean",

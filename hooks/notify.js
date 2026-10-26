@@ -17,7 +17,7 @@ const ESC = "\x1b";
 const BEL = "\x07";
 const ST = ESC + "\\";
 
-const FORMATS = ["auto", "osc777", "osc9", "osc99", "bell", "off"];
+const FORMATS = ["auto", "osc777", "osc9", "osc99", "all", "bell", "off"];
 
 // Known key and token shapes, masked before any text leaves the session:
 // a notification can land on a lock screen or a paired phone.
@@ -149,12 +149,20 @@ function sequence(format, title, body) {
       // `;` separates the fields, so neither part may hold one.
       return `${ESC}]777;notify;${title.replace(/;/g, ",")};${body.replace(/;/g, ",")}${BEL}`;
     case "osc9": {
-      // `9;<digit>;` is a progress report in some terminals, never a message.
-      const text = `${title}: ${body}`.replace(/^(\d+);/, "$1,");
+      // A body that starts with a number reads as a ConEmu command (`9;4`
+      // progress, ...), and Claude Code drops it.
+      let text = `${title}: ${body}`;
+      if (/^[\s᠎​]*[+-]?\p{Nd}/u.test(text)) text = `· ${text}`;
       return `${ESC}]9;${text}${BEL}`;
     }
     case "osc99":
       return `${ESC}]99;;${`${title}: ${body}`.replace(/;/g, ",")}${ST}`;
+    case "all":
+      // Every notification sequence, for a terminal the detection does not
+      // know. A terminal that reads more than one shows more than one. 777
+      // goes last: Agent Terminal keeps the last notice of a burst, and 777
+      // is the one that carries the title.
+      return ["osc9", "osc99", "osc777"].map((f) => sequence(f, title, body)).join("");
     case "bell":
       return BEL;
     default:

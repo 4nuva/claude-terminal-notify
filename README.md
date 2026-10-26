@@ -41,6 +41,8 @@ The plugin hands Claude Code a notification escape sequence through the hook's `
 | macOS Terminal, VS Code | bell |
 | anything else | OSC 9 |
 
+Claude Code has notifications of its own, on by default in Ghostty, kitty and iTerm2. If you see two notifications, set **Notifications** to `notifications_disabled` in `/config` (the `preferredNotifChannel` setting) to keep only this plugin's.
+
 Some terminals only show notifications while their window is in the background, and some need notifications turned on in their own settings (iTerm2: Profiles → Terminal → Notifications). Inside tmux, sequences reach the outer terminal only with `allow-passthrough on`.
 
 ## Options
@@ -49,7 +51,7 @@ Set these when you install, or later in `/plugin` → terminal-notify → Config
 
 | Option | Default | What it does |
 | --- | --- | --- |
-| `format` | `auto` | `auto`, `osc777`, `osc9`, `osc99`, `bell` or `off` |
+| `format` | `auto` | `auto`, `osc777`, `osc9`, `osc99`, `all`, `bell` or `off`. `all` sends all three sequences, for a terminal `auto` does not know; a terminal that reads more than one (Ghostty reads 9 and 777) shows more than one. |
 | `details` | on | Include the start of the reply, the command or file a permission is for, and the question. Off shows only the event. |
 | `idle_reminder` | off | Notify again when the prompt has waited 60 seconds for a reply |
 

@@ -71,7 +71,12 @@ test("terminal detection", () => {
 test("sequences", () => {
   assert.strictEqual(sequence("osc777", "T;x", "a;b"), "\x1b]777;notify;T,x;a,b\x07");
   assert.strictEqual(sequence("osc9", "T", "b"), "\x1b]9;T: b\x07");
-  assert.strictEqual(sequence("osc9", "4", "x"), "\x1b]9;4: x\x07");
+  assert.strictEqual(sequence("osc9", "4", "x"), "\x1b]9;· 4: x\x07");
+  assert.strictEqual(sequence("osc9", " -1 x", "y"), "\x1b]9;·  -1 x: y\x07");
+  assert.strictEqual(
+    sequence("all", "T", "b"),
+    "\x1b]9;T: b\x07" + "\x1b]99;;T: b\x1b\\" + "\x1b]777;notify;T;b\x07",
+  );
   assert.strictEqual(sequence("osc99", "T", "a;b"), "\x1b]99;;T: a,b\x1b\\");
   assert.strictEqual(sequence("bell", "T", "b"), "\x07");
 });
