@@ -1,0 +1,15 @@
+{
+  "name": "agent-terminal",
+  "owner": { "name": "Agent Terminal", "url": "https://4nuva.dev/agent-terminal/" },
+  "metadata": {
+    "description": "Claude Code plugins from the makers of Agent Terminal (https://4nuva.dev/agent-terminal/)."
+  },
+  "plugins": [
+    {
+      "name": "terminal-notify",
+      "source": "./",
+      "description": "Desktop notifications through your terminal when Claude Code finishes, asks a question or needs a permission. Picks OSC 777, 9 or 99 for your terminal.",
+      "homepage": "https://4nuva.dev/agent-terminal/"
+    }
+  ]
+}
