@@ -70,7 +70,7 @@ claude --plugin-dir .
 
 ## License
 
-MIT
+The code is MIT. The Agent Terminal name and logo (`.claude-plugin/icon.png`) are not covered by that licence; all rights reserved. See [LICENSE](LICENSE).
 
 ---
 
