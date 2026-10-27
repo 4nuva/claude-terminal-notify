@@ -152,7 +152,7 @@ function sequence(format, title, body) {
       // A body that starts with a number reads as a ConEmu command (`9;4`
       // progress, ...), and Claude Code drops it.
       let text = `${title}: ${body}`;
-      if (/^[\s᠎​]*[+-]?\p{Nd}/u.test(text)) text = `· ${text}`;
+      if (/^[\s\u180e\u200b]*[+-]?\p{Nd}/u.test(text)) text = `· ${text}`;
       return `${ESC}]9;${text}${BEL}`;
     }
     case "osc99":
