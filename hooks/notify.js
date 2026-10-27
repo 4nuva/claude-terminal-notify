@@ -11,7 +11,6 @@
 "use strict";
 
 const fs = require("fs");
-const path = require("path");
 
 const ESC = "\x1b";
 const BEL = "\x07";
@@ -203,7 +202,8 @@ function build(p, env) {
   } else {
     return null;
   }
-  const folder = path.basename(String(p.cwd || "").replace(/[\\/]+$/, "")) || "Claude Code";
+  // Both separators: a Windows path keeps its folder name on any platform.
+  const folder = String(p.cwd || "").replace(/[\\/]+$/, "").split(/[\\/]/).pop() || "Claude Code";
   const title = cap(clean(`Claude Code · ${folder}`), 80);
   return { title, body: cap(clean(body), 200) };
 }
